@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promengo</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="stylesheet" href="./fonts/Poppins/styleSheet.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="logo-container">
+          <img class="logo" alt src="imgs/logo.svg" alt="Website logo" />
+          <p class="website-title">Promengo</p>
+        </div>
+        <div class="sidebar-bottom">
+          <ul class="menu">
+            <li>
+              <div id="projects-nav" class="nav-item selected">
+                Projects
+                <img class="arrow-down" src="./imgs/arrow.svg" alt="" />
+              </div>
+              <ul class="projects-list" style="display: none"></ul>
+            </li>
+            <li>
+              <div class="nav-item">Contact us</div>
+            </li>
+            <li>
+              <div class="nav-item">About us</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="right-container">
+        <div class="header">
+          <img
+            src="./imgs/burger-icon.svg"
+            class="burger-icon"
+            alt="Projects Menu"
+          />
+
+          <div class="header-actions">
+            <div class="new-project">
+              <img src="imgs/Plus.svg" alt="add new project icon" />Add new
+              Project
+            </div>
+
+            <div class="user-name">
+              User name <img src="imgs/grayArrow.svg" />
+            </div>
+          </div>
+        </div>
+
+        <div class="main">
+          <!-- PopUps here -->
+
+          <div class="pop-up-container">
+            <div class="add-new-project-pop-up">
+              <div class="close-icon">
+                <img src="imgs/Icon material-close.svg" alt="" />
+              </div>
+              <div class="title">Add New Project</div>
+              <form name="newProjectForm" action="" class="new-project-form">
+                <label for="name" class="lable-for-project-name-input">
+                  Name</label
+                >
+                <input
+                  class="project-name-input"
+                  type="text"
+                  name="projectNameInput"
+                  id=""
+                  placeholder="New Project Name"
+                />
+                <label class="label-for-select-board-input" for="selecte"
+                  >Select Board</label
+                >
+                <div class="custom-select">
+                  <button
+                    type="button"
+                    class="select-button"
+                    role="combobox"
+                    aria-label="select button"
+                    aria-haspopup="listbox"
+                    aria-expanded="false"
+                    aria-controls="select-dropdown"
+                  >
+                    <span class="selected-value"> select Boards</span>
+                    <span class="arrow"></span>
+                  </button>
+
+                  <ul
+                    class="select-dropdown"
+                    role="listbox"
+                    id="select-dropdown"
+                  >
+                    <li role="option">
+                      <input
+                        type="checkbox"
+                        name=""
+                        class="check-box"
+                        id="To-Do"
+                      />
+                      <label>To Do</label>
+                    </li>
+                    <li role="option">
+                      <input
+                        class="check-box"
+                        type="checkbox"
+                        name=""
+                        id="in-Progress"
+                      />
+
+                      <label>In Progress</label>
+                    </li>
+                    <li role="option">
+                      <input
+                        class="check-box"
+                        type="checkbox"
+                        name=""
+                        class="check-box"
+                        id="done"
+                      />
+
+                      <label>Done</label>
+                    </li>
+                  </ul>
+                </div>
+
+                <button class="save-button">save</button>
+              </form>
+            </div>
+          </div>
+          <!-- PopUps here -->
+          <div class="project-header">
+            <h1 class="project-name"></h1>
+            <button class="add-new-board">
+              <img src="./imgs/whitePluse.svg" alt="" /> Add new board
+            </button>
+          </div>
+          <div class="main-bottom">
+            <div class="boards-container">
+              <div class="board">
+                <div class="board-action">
+                  <div class="board-name"><p>To Do</p></div>
+                  <div class="actions">
+                    <img src="./imgs/bluePluse.svg" alt="add new task" />
+                    <img src="./imgs/greenPen.svg" alt="edit board" />
+                    <img src="./imgs/trashCan.svg" alt=" delete board" />
+                  </div>
+                </div>
+                <div class="tasks-container">
+                  <div class="task"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./main.js" />
+  </body>
+</html>

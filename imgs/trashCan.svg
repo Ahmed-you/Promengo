@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="delete" transform="translate(-0.349 -0.349)">
+    <circle id="Ellipse_4" data-name="Ellipse 4" cx="8" cy="8" r="8" transform="translate(0.349 0.349)" fill="#cb400d"/>
+    <path id="Icon_material-delete" data-name="Icon material-delete" d="M7.876,10.518a.755.755,0,0,0,.752.752h3.009a.755.755,0,0,0,.752-.752V6H7.876Zm4.89-5.642H11.45L11.073,4.5H9.193l-.376.376H7.5v.752h5.266Z" transform="translate(-2.041 0.764)" fill="#fff"/>
+  </g>
+</svg>

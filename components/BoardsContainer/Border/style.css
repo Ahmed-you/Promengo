@@ -1,0 +1,47 @@
+@import url("./Tasks/style.css");
+.board {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  width: 275px;
+  max-height: calc(100vh - 345px);
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-right: 50px;
+  border: 0px;
+  padding: 20px 0 0 0;
+}
+
+.board .board-action {
+  min-height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 0 10px;
+}
+
+.board .board-name {
+  font-size: 16px;
+  word-break: break-all;
+}
+.board .actions img {
+  width: 16px;
+}
+.board .actions {
+  margin-left: 135px;
+}
+
+.board .tasks-container {
+  overflow-y: auto;
+  scroll-margin-left: 100px;
+
+  margin: 0 5px;
+  padding: 5px 15px 20px;
+}
+
+@media screen and (max-height: 651px) {
+  .board {
+    max-height: calc(100vh - 230px);
+  }
+}

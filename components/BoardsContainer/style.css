@@ -1,0 +1,57 @@
+@import url("./Border/style.css");
+
+.add-new-board {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 180px;
+  height: 44px;
+  font-size: 16px;
+  background-color: #0c2196;
+  color: white;
+  border: 0px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-new-board:hover {
+  background-color: #1c32b4;
+}
+.project-name {
+  font-size: 1rem;
+  font-weight: 500;
+  padding-top: 10px;
+  max-width: 156px;
+  word-wrap: break-word;
+}
+@media screen and (max-width: 768px) {
+  .add-new-board {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 180px;
+    height: 44px;
+    font-size: 16px;
+    background-color: #0c2196;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .add-new-board {
+    width: 140px;
+    height: 35px;
+    font-size: 0.83em;
+    font-weight: 500;
+  }
+  .add-new-board img {
+    height: 13px;
+  }
+  .project-name {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}

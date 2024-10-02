@@ -1,0 +1,66 @@
+@import url("./components/Header/style.css");
+@import url("./components/Main/style.css");
+@import url("./components/Sidebar/style.css");
+@import url("./components/BoardsContainer/style.css");
+
+*,
+body,
+html {
+  padding: 0;
+  margin: 0;
+  font-family: poppins;
+  font-weight: 400;
+}
+
+body {
+  font-family: Gadugi;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+::-webkit-scrollbar {
+  width: 7px;
+  height: 10px;
+}
+
+.main {
+  flex: 1;
+  background-color: #f7f8fc;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d8d8e5;
+  border-radius: 7px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b9b9c6;
+}
+
+.display-none {
+  display: block;
+}
+
+@media (max-height: 551px) {
+  body {
+    font-size: 0.9rem;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 7px;
+  }
+}

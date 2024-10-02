@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g id="edit" transform="translate(0.139 -0.349)">
+    <circle id="Ellipse_3" data-name="Ellipse 3" cx="8" cy="8" r="8" transform="translate(-0.139 0.349)" fill="#7acb0d"/>
+    <path id="Icon_material-mode-edit" data-name="Icon material-mode-edit" d="M4.5,9.75v1.382H5.844L9.808,7.056,8.464,5.673Zm6.348-3.764a.375.375,0,0,0,0-.52L10.009,4.6a.35.35,0,0,0-.505,0l-.656.675,1.344,1.382Z" transform="translate(0.599 0.443)" fill="#fff"/>
+  </g>
+</svg>
