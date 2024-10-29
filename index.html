@@ -74,6 +74,7 @@
                   id=""
                   placeholder="New Project Name"
                 />
+
                 <label class="label-for-select-board-input" for="selecte"
                   >Select Board</label
                 >
@@ -133,9 +134,93 @@
               </form>
             </div>
           </div>
-          <!-- PopUps here -->
+          <!-- PopUps end here -->
           <div class="project-header">
-            <h1 class="project-name"></h1>
+            <div class="project-name-container">
+              <h1 class="project-name"></h1>
+              <form name="actionForm" action="" class="hide">
+                <input
+                  class="edit-project-name-input"
+                  type="text"
+                  name="edit-project-name-input"
+                  id=""
+                />
+              </form>
+              <svg
+                class="green-true-icon hide"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="517 196.95 16 16"
+              >
+                <g data-name="edit">
+                  <!-- use curent color to tke control over the colors via css -->
+                  <path
+                    d="M517 204.9a8 8 0 1 1 0 .1z"
+                    fill="#7acb0d"
+                    fill-rule="evenodd"
+                    data-name="Ellipse 3"
+                  />
+                  <path
+                    d="m528.295 202.735-4.53 4.53-2.06-2.06"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke="#fff"
+                    fill="transparent"
+                    data-name="Icon feather-check"
+                  />
+                </g>
+              </svg>
+              <svg
+                class="red-delete-icon hide"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="539 196.95 16 16"
+              >
+                <g data-name="delete">
+                  <path
+                    d="M539 204.9a8 8 0 1 1 0 .1z"
+                    fill="#cb400d"
+                    fill-rule="evenodd"
+                    data-name="Ellipse 4"
+                  />
+                  <path
+                    d="m549.398 203.523-.483-.523-1.915 2.074-1.915-2.074-.483.523 1.915 2.074-1.915 2.074.483.524L547 206.12l1.915 2.074.483-.524-1.915-2.074 1.915-2.074Z"
+                    fill="#fff"
+                    fill-rule="evenodd"
+                    data-name="Icon material-close"
+                  />
+                </g>
+              </svg>
+              <div class="three-dots-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="5.406"
+                  viewBox="0 0 17.624 4.406"
+                >
+                  <path
+                    id="Icon_material-more-horiz"
+                    data-name="Icon material-more-horiz"
+                    d="M8.2,15a2.2,2.2,0,1,0,2.2,2.2A2.209,2.209,0,0,0,8.2,15Zm13.218,0a2.2,2.2,0,1,0,2.2,2.2A2.209,2.209,0,0,0,21.421,15Zm-6.609,0a2.2,2.2,0,1,0,2.2,2.2A2.209,2.209,0,0,0,14.812,15Z"
+                    transform="translate(-6 -15)"
+                    fill="#a09999"
+                  />
+                </svg>
+
+                <div class="actions-container">
+                  <div class="edit">
+                    <p>Edit</p>
+                  </div>
+
+                  <div class="delete">
+                    <p>Delete</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <button class="add-new-board">
               <img src="./imgs/whitePluse.svg" alt="" /> Add new board
             </button>
@@ -146,9 +231,82 @@
                 <div class="board-action">
                   <div class="board-name"><p>To Do</p></div>
                   <div class="actions">
-                    <img src="./imgs/bluePluse.svg" alt="add new task" />
-                    <img src="./imgs/greenPen.svg" alt="edit board" />
-                    <img src="./imgs/trashCan.svg" alt=" delete board" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                    >
+                      <g id="add" transform="translate(-0.373 -0.349)">
+                        <circle
+                          id="Ellipse_5"
+                          data-name="Ellipse 5"
+                          cx="8"
+                          cy="8"
+                          r="8"
+                          transform="translate(0.373 0.349)"
+                          fill="#0c2196"
+                        />
+                        <path
+                          id="Icon_material-add"
+                          data-name="Icon material-add"
+                          d="M14.458,11.476H11.476v2.982h-.994V11.476H7.5v-.994h2.982V7.5h.994v2.982h2.982Z"
+                          transform="translate(-2.606 -2.63)"
+                          fill="#fff"
+                        />
+                      </g>
+                    </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                    >
+                      <g id="edit" transform="translate(0.139 -0.349)">
+                        <circle
+                          id="Ellipse_3"
+                          data-name="Ellipse 3"
+                          cx="8"
+                          cy="8"
+                          r="8"
+                          transform="translate(-0.139 0.349)"
+                          fill="#7acb0d"
+                        />
+                        <path
+                          id="Icon_material-mode-edit"
+                          data-name="Icon material-mode-edit"
+                          d="M4.5,9.75v1.382H5.844L9.808,7.056,8.464,5.673Zm6.348-3.764a.375.375,0,0,0,0-.52L10.009,4.6a.35.35,0,0,0-.505,0l-.656.675,1.344,1.382Z"
+                          transform="translate(0.599 0.443)"
+                          fill="#fff"
+                        />
+                      </g>
+                    </svg>
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                    >
+                      <g id="delete" transform="translate(-0.349 -0.349)">
+                        <circle
+                          id="Ellipse_4"
+                          data-name="Ellipse 4"
+                          cx="8"
+                          cy="8"
+                          r="8"
+                          transform="translate(0.349 0.349)"
+                          fill="#cb400d"
+                        />
+                        <path
+                          id="Icon_material-delete"
+                          data-name="Icon material-delete"
+                          d="M7.876,10.518a.755.755,0,0,0,.752.752h3.009a.755.755,0,0,0,.752-.752V6H7.876Zm4.89-5.642H11.45L11.073,4.5H9.193l-.376.376H7.5v.752h5.266Z"
+                          transform="translate(-2.041 0.764)"
+                          fill="#fff"
+                        />
+                      </g>
+                    </svg>
                   </div>
                 </div>
                 <div class="tasks-container">

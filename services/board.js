@@ -1,6 +1,6 @@
 import { getLocalStorage, setLocalStorage } from "../helpers/localStorage.js";
 import { makeId } from "../helpers/utils.js";
-import { getProjectFromLocalStorageById } from "./project.js";
+import { getProjectById } from "./project.js";
 
 export const addBoardInLocalStorage = (boardName, projectId) => {
   if (!boardName) {

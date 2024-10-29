@@ -8,6 +8,88 @@
   overflow-x: auto;
   padding-bottom: 50px;
 }
+.main .project-name-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+.three-dots-icon {
+  position: relative;
+  cursor: pointer;
+  margin: 0 0 3px 7px;
+}
+.menu-container {
+  position: relative;
+  cursor: pointer;
+}
+.actions-container {
+  position: absolute;
+  width: 102px;
+  height: 80px;
+  left: 16px;
+  top: 27px;
+  border-radius: 5px;
+  display: none;
+  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.14));
+  background: #ffffff;
+}
+.show {
+  display: inline;
+}
+.hide {
+  display: none;
+}
+.actions-container .edit {
+  position: relative;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  position: relative;
+
+  height: 40px;
+
+  cursor: pointer;
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+  color: #6f6f6f;
+}
+.actions-container .edit:hover {
+  position: relative;
+
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.153);
+}
+.actions-container .edit p {
+  position: relative;
+  top: 12px;
+  left: -26px;
+}
+.actions-container .delete {
+  position: relative;
+  height: 40px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+  color: #6f6f6f;
+  cursor: pointer;
+}
+.actions-container .delete p {
+  position: relative;
+  top: 13px;
+  left: -16px;
+}
+.actions-container .delete:hover {
+  position: relative;
+
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.153);
+}
 .main .project-header {
   display: flex;
   flex-direction: row;
@@ -49,6 +131,36 @@
   .main {
     padding: 25px 25px 5px;
   }
+}
+.green-true-icon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+.red-delete-icon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+.edit-project-name-input {
+  position: relative;
+  right: 11px;
+  top: -0.5px;
+  border-color: rgba(112, 112, 112, 0.2);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  padding-left: 10px;
+  background: #ffffff;
+  min-width: 200px;
+  max-width: 500px;
+  height: 38px;
+
+  font-size: 1.4rem;
+  font-weight: 500;
+
+  /* max-width: 500px; */
+  word-wrap: break-word;
 }
 
 /* PopUps   */

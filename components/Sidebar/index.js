@@ -3,7 +3,7 @@ import {
   setLocalStorage,
 } from "../../helpers/localStorage.js";
 import { addProjectInLocalStorage } from "../../services/project.js";
-import { getProjectFromLocalStorageById } from "../../services/project.js";
+import { getProjectById } from "../../services/project.js";
 import { viewProjectNameOnMainPage } from "../Main/index.js";
 
 const setupNavigationMenuBehaver = () => {
@@ -19,8 +19,8 @@ const setupNavigationMenuBehaver = () => {
         "projectsDisplayStatsInTheSideBar"
       );
       arrow.className = localStorage.getItem("sidebarArrowStats");
-      // getProjectFromLocalStorageByIdAndDisplayIt("");
-      let projectId = localStorage.getItem("currentProjectIdFromSidebar");
+      // getProjectByIdAndDisplayIt("");
+      let projectId = getLocalStorage("currentProjectIdFromSidebar");
       let wantedProject = document.getElementById(projectId);
       wantedProject.classList = "selected-project";
     }
@@ -73,7 +73,7 @@ export const previewProjectsNameOnTheSidebar = () => {
 };
 
 export const renderCurrentProject = (id) => {
-  setLocalStorage("currentProjectIdFromSidebar", +id);
+  setLocalStorage("currentProjectIdFromSidebar", id);
   viewProjectNameOnMainPage();
 };
 

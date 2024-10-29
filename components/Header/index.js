@@ -5,7 +5,8 @@ import {
   renderCurrentProject,
 } from "../Sidebar/index.js";
 import { getLocalStorage } from "../../helpers/localStorage.js";
-// hide/show side bar when screen width get to a cretin size
+import { setLocalStorage } from "../../helpers/localStorage.js";
+// show/show side bar when screen width get to a cretin size
 const sidebarMenuBtnHandler = () => {
   const sidebar = document.querySelector(".sidebar");
 
@@ -103,6 +104,7 @@ const HandilingAddNewProjectPopUp = () => {
 
   let addNewProjectForm = document.forms.newProjectForm;
   let projectNameInput = addNewProjectForm.elements.projectNameInput;
+
   let boards = [];
   function isValidString(input) {
     const regex = /^[a-zA-Z0-9 ]*$/;

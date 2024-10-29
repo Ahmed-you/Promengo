@@ -34,8 +34,8 @@ export const deleteProject = (id) => {
   if (!id) {
     throw new Error("'id' is required.");
   }
-  if (typeof id === "string") {
-    throw new Error("'id' must be a number.");
+  if (typeof id !== "string") {
+    throw new Error("'id' must be a string.");
   }
   if (!project) {
     throw new Error("There is no project with that id");
@@ -45,6 +45,7 @@ export const deleteProject = (id) => {
   projects.splice(index, 1);
 
   setLocalStorage("projects", projects);
+  return projects;
 };
 
 // this function update the projectName that is selected by its id
@@ -56,8 +57,8 @@ export const updateProjects = (id, newName) => {
   if (!id) {
     throw new Error("there is no id");
   }
-  if (typeof id === "string") {
-    throw new Error("id must be a number.");
+  if (typeof id !== "string") {
+    throw new Error("id must be a string.");
   }
 
   let projects = getLocalStorage("projects");
@@ -68,8 +69,10 @@ export const updateProjects = (id, newName) => {
     throw new Error("there is no project with that id");
   }
 
+  console.log(project);
+
   project.projectName = newName;
-  let index;
+  let index = projects.indexOf(project);
   projects.splice(index, 1, project);
   setLocalStorage("projects", projects);
 };
@@ -92,7 +95,7 @@ export const updateProjects = (id, newName) => {
 //   }
 //   return wantedProjects;
 // };
-export const getProjectFromLocalStorageById = (projectId) => {
+export const getProjectById = (projectId) => {
   let projects = getLocalStorage("projects");
 
   if (!projectId) return;
@@ -100,5 +103,6 @@ export const getProjectFromLocalStorageById = (projectId) => {
   const wantedProject = projects.find(
     (project) => project.ProjectId == projectId
   );
+
   return wantedProject;
 };

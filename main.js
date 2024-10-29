@@ -22,6 +22,7 @@ import {
 } from "./services/project.js";
 
 import { addBoardInLocalStorage } from "./services/board.js";
+import { viewProjectNameOnMainPage } from "./components/Main/index.js";
 // addBoardInLocalStorage("my board", 81221);
 let projectData = [
   {
@@ -97,3 +98,12 @@ window.addEventListener("storage", () => {
 window.onstorage = () => {
   console.log("hello");
 };
+
+// window.onload = () => {
+//   // const curantId = getLocalStorage("currentProjectIdFromSidebar")
+//   viewProjectNameOnMainPage();
+//   // renderCurrentProject();
+//   // render the sidebar
+//   // render the heder
+//   // render the main section
+// };
