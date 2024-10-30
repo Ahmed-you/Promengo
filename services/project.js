@@ -69,8 +69,6 @@ export const updateProjects = (id, newName) => {
     throw new Error("there is no project with that id");
   }
 
-  console.log(project);
-
   project.projectName = newName;
   let index = projects.indexOf(project);
   projects.splice(index, 1, project);
