@@ -10,7 +10,6 @@ export const addBoardInLocalStorage = (boardName, projectId) => {
     throw new Error(" 'boardName' is required it cant be null");
   }
   // if (boardName != "string") {
-  //   console.log(typeof projectName);
 
   //   throw new Error("'projectName' must be a string value");
   // }

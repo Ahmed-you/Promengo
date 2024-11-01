@@ -64,70 +64,74 @@
               </div>
               <div class="title">Add New Project</div>
               <form name="newProjectForm" action="" class="new-project-form">
-                <label for="name" class="lable-for-project-name-input">
-                  Name</label
-                >
-                <input
-                  class="project-name-input"
-                  type="text"
-                  name="projectNameInput"
-                  id=""
-                  placeholder="New Project Name"
-                />
-
-                <label class="label-for-select-board-input" for="selecte"
-                  >Select Board</label
-                >
-                <div class="custom-select">
-                  <button
-                    type="button"
-                    class="select-button"
-                    role="combobox"
-                    aria-label="select button"
-                    aria-haspopup="listbox"
-                    aria-expanded="false"
-                    aria-controls="select-dropdown"
+                <div>
+                  <label for="name" class="lable-for-project-name-input">
+                    Name</label
                   >
-                    <span class="selected-value"> select Boards</span>
-                    <span class="arrow"></span>
-                  </button>
+                  <input
+                    class="project-name-input"
+                    type="text"
+                    name="projectNameInput"
+                    id=""
+                    placeholder="New Project Name"
+                  />
+                </div>
 
-                  <ul
-                    class="select-dropdown"
-                    role="listbox"
-                    id="select-dropdown"
+                <div>
+                  <label class="label-for-select-board-input" for="selecte"
+                    >Select Board</label
                   >
-                    <li role="option">
-                      <input
-                        type="checkbox"
-                        name=""
-                        class="check-box"
-                        id="To-Do"
-                      />
-                      <label>To Do</label>
-                    </li>
-                    <li role="option">
-                      <input
-                        class="check-box"
-                        type="checkbox"
-                        name=""
-                        id="in-Progress"
-                      />
+                  <div class="custom-select">
+                    <button
+                      type="button"
+                      class="select-button"
+                      role="combobox"
+                      aria-label="select button"
+                      aria-haspopup="listbox"
+                      aria-expanded="false"
+                      aria-controls="select-dropdown"
+                    >
+                      <span class="selected-value"> select Boards</span>
+                      <span class="arrow"></span>
+                    </button>
 
-                      <label>In Progress</label>
-                    </li>
-                    <li role="option">
-                      <input
-                        class="check-box"
-                        type="checkbox"
-                        name=""
-                        class="check-box"
-                        id="done"
-                      />
+                    <ul
+                      class="select-dropdown"
+                      role="listbox"
+                      id="select-dropdown"
+                    >
+                      <li role="option">
+                        <input
+                          type="checkbox"
+                          name=""
+                          class="check-box"
+                          id="To-Do"
+                        />
+                        <label>To Do</label>
+                      </li>
+                      <li role="option">
+                        <input
+                          class="check-box"
+                          type="checkbox"
+                          name=""
+                          id="in-Progress"
+                        />
 
-                      <label>Done</label>
-                    </li>
-                  </ul>
+                        <label>In Progress</label>
+                      </li>
+                      <li role="option">
+                        <input
+                          class="check-box"
+                          type="checkbox"
+                          name=""
+                          class="check-box"
+                          id="done"
+                        />
+
+                        <label>Done</label>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
 
                 <button class="save-button">save</button>
@@ -210,11 +214,11 @@
                 </svg>
 
                 <div class="actions-container">
-                  <div class="edit">
+                  <div class="edit action-item">
                     <p>Edit</p>
                   </div>
 
-                  <div class="delete">
+                  <div class="delete action-item">
                     <p>Delete</p>
                   </div>
                 </div>
@@ -318,7 +322,7 @@
         </div>
       </div>
     </div>
-
-    <script type="module" src="./main.js" />
+    <script src="./helpers/domHelpers.js"></script>
+    <script type="module" src="./main.js"></script>
   </body>
 </html>

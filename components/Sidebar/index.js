@@ -4,12 +4,12 @@ import {
 } from "../../helpers/localStorage.js";
 import { addProjectInLocalStorage } from "../../services/project.js";
 import { getProjectById } from "../../services/project.js";
-import { viewProjectNameOnMainPage } from "../Main/index.js";
+import { displayCurrentProjectName } from "../Main/index.js";
 
 const setupNavigationMenuBehaver = () => {
-  const projectsNavElement = document.querySelector("#projects-nav");
-  const projectsList = document.querySelector(".projects-list");
-  const arrow = document.querySelector("#projects-nav img");
+  const projectsNavElement = getElement("#projects-nav");
+  const projectsList = getElement(".projects-list");
+  const arrow = getElement("#projects-nav img");
   let li = document.createElement("li");
   window.addEventListener("load", () => {
     if (!projectsList.firstElementChild) {
@@ -21,8 +21,8 @@ const setupNavigationMenuBehaver = () => {
       arrow.className = localStorage.getItem("sidebarArrowStats");
       // getProjectByIdAndDisplayIt("");
       let projectId = getLocalStorage("currentProjectIdFromSidebar");
-      let wantedProject = document.getElementById(projectId);
-      wantedProject.classList = "selected-project";
+      let selectedProject = document.getElementById(projectId);
+      selectedProject.classList = "selected-project";
     }
   });
 
@@ -30,7 +30,7 @@ const setupNavigationMenuBehaver = () => {
     const { display: projectsNavDisplay } = projectsList.style;
     const isOpen = !projectsNavDisplay;
 
-    // Open & close the menu  viewProjectNameOnMainPage();
+    // Open & close the menu  displayCurrentProjectName();
 
     projectsList.style.display = isOpen ? "none" : "";
     // Arrow type (closed or opened)
@@ -45,7 +45,7 @@ const setupNavigationMenuBehaver = () => {
 };
 
 export const previewProjectsNameOnTheSidebar = () => {
-  let projectsNameUl = document.querySelector(".projects-list");
+  let projectsNameUl = getElement(".projects-list");
 
   const projects = getLocalStorage("projects");
 
@@ -74,7 +74,7 @@ export const previewProjectsNameOnTheSidebar = () => {
 
 export const renderCurrentProject = (id) => {
   setLocalStorage("currentProjectIdFromSidebar", id);
-  viewProjectNameOnMainPage();
+  displayCurrentProjectName();
 };
 
 const init = () => {

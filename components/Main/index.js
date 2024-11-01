@@ -9,43 +9,45 @@ import {
 } from "../../services/project.js";
 import { previewProjectsNameOnTheSidebar } from "../Sidebar/index.js";
 import { renderCurrentProject } from "../Sidebar/index.js";
-let proName = document.querySelector(".project-name");
-//  AA!243232
-const threeDotsIcon = document.querySelector(".three-dots-icon");
-const redDeleteIcon = document.querySelector(".red-delete-icon");
-const greenTrueIcon = document.querySelector(".green-true-icon");
-let wantedProject;
-export const viewProjectNameOnMainPage = () => {
-  wantedProject = getProjectById(
-    getLocalStorage("currentProjectIdFromSidebar")
-  );
-  if (!wantedProject) {
-    proName.textContent = "NoProjectsYet";
+import { isValidString } from "../../helpers/utils.js";
+
+let projectNameElement = getElement(".project-name");
+const threeDotsIcon = getElement(".three-dots-icon");
+const redDeleteIcon = getElement(".red-delete-icon");
+const greenTrueIcon = getElement(".green-true-icon");
+let selectedProject;
+export const displayCurrentProjectName = () => {
+  const projectId = getLocalStorage("currentProjectIdFromSidebar");
+  const selectedProject = getProjectById(projectId);
+
+  if (!selectedProject) {
+    projectNameElement.textContent = "NoProjectsYet";
     threeDotsIcon.classList.add("hide");
   } else {
-    proName.textContent = wantedProject.projectName;
+    projectNameElement.textContent = selectedProject.projectName;
     threeDotsIcon.classList.remove("hide");
   }
 };
-const actionMenuContainer = document.querySelector(".actions-container");
+const actionMenuContainer = getElement(".actions-container");
 export const deleteProjectUiAction = (deletedId) => {
   let projects = getLocalStorage("projects");
-  const project = projects.find((item) => item.ProjectId == deletedId);
-  let currantIndex = projects.indexOf(project);
+  let currentIndex = projects.findIndex(
+    (item) => item.ProjectId === deletedId
+  );
 
-  if (currantIndex == 0 && projects.length > 1) {
+  if (currentIndex == 0 && projects.length > 1) {
   } else {
-    currantIndex--;
+    currentIndex--;
   }
 
   projects = deleteProject(deletedId);
 
-  const newId = currantIndex < 0 ? null : projects[currantIndex].ProjectId;
-
-  renderCurrentProject(newId);
+  const newProjectId =
+    currentIndex < 0 ? null : projects[currentIndex]?.ProjectId;
+  renderCurrentProject(newProjectId);
   previewProjectsNameOnTheSidebar();
 
-  const liElement = document.getElementById(newId);
+  const liElement = document.getElementById(newProjectId);
 
   if (liElement) {
     liElement.classList.add("selected-project");
@@ -57,50 +59,43 @@ let actionForm = document.forms["actionForm"]["edit-project-name-input"];
 const editProjectUiAction = () => {
   //copied code
   let EditProjectNameInput = actionForm;
-  wantedProject = getProjectById(
+  selectedProject = getProjectById(
     getLocalStorage("currentProjectIdFromSidebar")
   );
-  EditProjectNameInput.value = wantedProject.projectName;
-  function isValidString(input) {
-    const regex = /^[a-zA-Z0-9 ]*$/;
-    return regex.test(input);
+  EditProjectNameInput.value = selectedProject.projectName;
+  isValidString();
+
+  const errorMsg = document.createElement("div");
+  errorMsg.className = "error-message";
+
+  function addError(inputElement, message) {
+    errorMsg.textContent = message;
+    inputElement.style.border = "1px solid red";
+    inputElement.before(errorMsg);
   }
-  let errorMSG = document.createElement("div");
 
-  errorMSG.style.color = "red";
-  errorMSG.style.fontSize = "11px";
-  errorMSG.style.fontWeight = "500";
-  errorMSG.style.position = "absolute";
-  errorMSG.style.left = " 305px";
-  errorMSG.style.top = " 80px";
+  function removeError(inputElement) {
+    inputElement.style.border = "";
+    errorMsg.remove();
+  }
 
-  const lableForProjectNameInput = document.querySelector(
-    ".lable-for-project-name-input"
-  );
   EditProjectNameInput.onblur = function () {
     if (!isValidString(EditProjectNameInput.value)) {
-      errorMSG.textContent = "*Please Enter a Valid Name Only 'a-z A-Z 0-9'";
-
-      EditProjectNameInput.style.border = "1px red solid";
-      EditProjectNameInput.before(errorMSG);
-    }
-
-    if (EditProjectNameInput.value == "") {
-      errorMSG.textContent = "*Project Name Can Not Be Empty'";
-
-      EditProjectNameInput.before(errorMSG);
-      EditProjectNameInput.style.border = "1px red solid";
+      addError(
+        EditProjectNameInput,
+        "*Please Enter a Valid Name Only 'a-z A-Z 0-9'"
+      );
+    } else if (EditProjectNameInput.value === "") {
+      addError(EditProjectNameInput, "*Project Name Cannot Be Empty");
     }
   };
 
   EditProjectNameInput.onfocus = function () {
-    EditProjectNameInput.style.border = "";
-
-    errorMSG.remove();
+    removeError(EditProjectNameInput);
   };
   //end of copied code
 
-  proName.replaceWith(EditProjectNameInput);
+  projectNameElement.replaceWith(EditProjectNameInput);
   setTimeout(() => {
     EditProjectNameInput.focus();
   }, 0);
@@ -117,39 +112,42 @@ const editProjectUiAction = () => {
     greenTrueIcon.classList.add("hide");
     redDeleteIcon.classList.add("hide");
 
-    proName.textContent = EditProjectNameInput.value;
+    projectNameElement.textContent = EditProjectNameInput.value;
     previewProjectsNameOnTheSidebar();
     const liElement = document.getElementById(currentProjectId);
     liElement.classList.add("selected-project");
 
-    EditProjectNameInput.replaceWith(proName);
+    EditProjectNameInput.replaceWith(projectNameElement);
   });
   redDeleteIcon.addEventListener("pointerdown", () => {
     threeDotsIcon.classList.remove("hide");
     redDeleteIcon.classList.add("hide");
     greenTrueIcon.classList.add("hide");
-    EditProjectNameInput.replaceWith(proName);
+    EditProjectNameInput.replaceWith(projectNameElement);
   });
 };
+document.addEventListener("pointerdown", handleClick);
 
-document.addEventListener("pointerdown", (e) => {
-  if (e.target.closest(".delete")) {
+function handleClick(e) {
+  const { target } = e;
+
+  if (target.closest(".delete")) {
     let currentId = getLocalStorage("currentProjectIdFromSidebar");
 
     deleteProjectUiAction(currentId);
   }
-  if (e.target.closest(".three-dots-icon")) {
+  if (target.closest(".three-dots-icon")) {
     actionMenuContainer.classList.toggle("show");
-  } else if (e.target.className != "three-dots-icon") {
+  } else if (target.className != "three-dots-icon") {
     actionMenuContainer.classList.remove("show");
   }
   if (e.target.closest(".edit")) {
     editProjectUiAction();
   }
-});
+}
 
 const init = () => {
-  viewProjectNameOnMainPage();
+  displayCurrentProjectName();
   // deleteProjectUiAction();
 };
 init();
