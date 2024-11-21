@@ -5,9 +5,11 @@ import {
   renderCurrentProject,
 } from "../Sidebar/index.js";
 import { getLocalStorage } from "../../helpers/localStorage.js";
-// hide/show side bar when screen width get to a cretin size
+import { setLocalStorage } from "../../helpers/localStorage.js";
+import { isValidString } from "../../helpers/utils.js";
+// show/show side bar when screen width get to a cretin size
 const sidebarMenuBtnHandler = () => {
-  const sidebar = document.querySelector(".sidebar");
+  const sidebar = getElement(".sidebar");
 
   document.addEventListener("pointerdown", (e) => {
     const { width: screenWidth, md } = document.screenSize;
@@ -29,13 +31,13 @@ const HandilingAddNewProjectPopUp = () => {
     "in-Progress": "In Progress",
     "To-Do": "To Do",
   };
-  const newProjectBtn = document.querySelector(".new-project");
-  const popUpContainer = document.querySelector(".pop-up-container");
-  const customSelect = document.querySelector(".custom-select");
-  const selectBtn = document.querySelector(".select-button > span");
-  const selectedValue = document.querySelector(".selected-value");
-  const projectsList = document.querySelector(".projects-list");
-  const arrow = document.querySelector("#projects-nav img");
+  const newProjectBtn = getElement(".new-project");
+  const popUpContainer = getElement(".pop-up-container");
+  const customSelect = getElement(".custom-select");
+  const selectBtn = getElement(".select-button > span");
+  const selectedValue = getElement(".selected-value");
+  const projectsList = getElement(".projects-list");
+  const arrow = getElement("#projects-nav img");
 
   //this event is responsible for showing/hiding the pop up
   newProjectBtn.addEventListener("click", (e) => {
@@ -103,53 +105,46 @@ const HandilingAddNewProjectPopUp = () => {
 
   let addNewProjectForm = document.forms.newProjectForm;
   let projectNameInput = addNewProjectForm.elements.projectNameInput;
-  let boards = [];
-  function isValidString(input) {
-    const regex = /^[a-zA-Z0-9 ]*$/;
-    return regex.test(input);
-  }
-  let errorMSG = document.createElement("div");
 
-  errorMSG.style.color = "red";
-  errorMSG.style.fontSize = "11px";
-  errorMSG.style.fontWeight = "500";
-  errorMSG.style.position = "absolute";
-  errorMSG.style.left = "44px";
-  errorMSG.style.top = "2px";
-  const lableForProjectNameInput = document.querySelector(
-    ".lable-for-project-name-input"
-  );
+  let boards = [];
+  isValidString();
+  const errorMsg = document.createElement("div");
+  errorMsg.classList.add("error-message");
+
+  errorMsg.style.left = "44px";
+  errorMsg.style.top = "2px";
+  const lableForProjectNameInput = getElement(".lable-for-project-name-input");
   projectNameInput.onblur = function () {
-    errorMSG.textContent = "*Please Enter a Valid Name Only 'a-z A-Z 0-9'";
+    errorMsg.textContent = "*Please Enter a Valid Name Only 'a-z A-Z 0-9'";
 
     if (!isValidString(projectNameInput.value)) {
       projectNameInput.style.border = "1px red solid";
-      lableForProjectNameInput.after(errorMSG);
+      lableForProjectNameInput.after(errorMsg);
     }
   };
 
   projectNameInput.onfocus = function () {
     projectNameInput.style.border = "";
 
-    errorMSG.remove();
+    errorMsg.remove();
   };
   addNewProjectForm.addEventListener("submit", (e) => {
     if (!projectNameInput.value) {
-      errorMSG.innerHTML = "*Please Enter a Project Name";
-      lableForProjectNameInput.after(errorMSG);
+      errorMsg.innerHTML = "*Please Enter a Project Name";
+      lableForProjectNameInput.after(errorMsg);
 
       e.preventDefault();
       return;
     }
     if (!isValidString(projectNameInput.value)) {
       let timerId = setInterval(() => {
-        errorMSG.style.fontWeight = "600";
+        errorMsg.style.fontWeight = "600";
       }, 0);
 
       // after 5 seconds stop
       setTimeout(() => {
         clearInterval(timerId);
-        errorMSG.style.fontWeight = "400";
+        errorMsg.style.fontWeight = "400";
       }, 1000);
 
       e.preventDefault();

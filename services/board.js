@@ -1,6 +1,6 @@
 import { getLocalStorage, setLocalStorage } from "../helpers/localStorage.js";
 import { makeId } from "../helpers/utils.js";
-import { getProjectFromLocalStorageById } from "./project.js";
+import { getProjectById } from "./project.js";
 
 export const addBoardInLocalStorage = (boardName, projectId) => {
   if (!boardName) {
@@ -10,7 +10,6 @@ export const addBoardInLocalStorage = (boardName, projectId) => {
     throw new Error(" 'boardName' is required it cant be null");
   }
   // if (boardName != "string") {
-  //   console.log(typeof projectName);
 
   //   throw new Error("'projectName' must be a string value");
   // }

@@ -6,7 +6,6 @@ export const addProjectInLocalStorage = (projectName, boards) => {
     throw new Error(" 'projectName' is required it cant be null");
   }
   // if (projectName != "string") {
-  //   console.log(typeof projectName);
 
   //   throw new Error("'projectName' must be a string value");
   // }
@@ -34,8 +33,8 @@ export const deleteProject = (id) => {
   if (!id) {
     throw new Error("'id' is required.");
   }
-  if (typeof id === "string") {
-    throw new Error("'id' must be a number.");
+  if (typeof id !== "string") {
+    throw new Error("'id' must be a string.");
   }
   if (!project) {
     throw new Error("There is no project with that id");
@@ -45,6 +44,7 @@ export const deleteProject = (id) => {
   projects.splice(index, 1);
 
   setLocalStorage("projects", projects);
+  return projects;
 };
 
 // this function update the projectName that is selected by its id
@@ -56,8 +56,8 @@ export const updateProjects = (id, newName) => {
   if (!id) {
     throw new Error("there is no id");
   }
-  if (typeof id === "string") {
-    throw new Error("id must be a number.");
+  if (typeof id !== "string") {
+    throw new Error("id must be a string.");
   }
 
   let projects = getLocalStorage("projects");
@@ -69,7 +69,7 @@ export const updateProjects = (id, newName) => {
   }
 
   project.projectName = newName;
-  let index;
+  let index = projects.indexOf(project);
   projects.splice(index, 1, project);
   setLocalStorage("projects", projects);
 };
@@ -83,22 +83,23 @@ export const updateProjects = (id, newName) => {
 
 //   let projects = getLocalStorage("projects");
 
-//   const wantedProjects = projects.filter((project) =>
+//   const selectedProjects = projects.filter((project) =>
 //     project.projectName.includes(projectName)
 //   );
 
-//   if (wantedProjects.length === 0) {
+//   if (selectedProjects.length === 0) {
 //     throw new Error("no projects with that name");
 //   }
-//   return wantedProjects;
+//   return selectedProjects;
 // };
-export const getProjectFromLocalStorageById = (projectId) => {
+export const getProjectById = (projectId) => {
   let projects = getLocalStorage("projects");
 
   if (!projectId) return;
 
-  const wantedProject = projects.find(
+  const selectedProject = projects.find(
     (project) => project.ProjectId == projectId
   );
-  return wantedProject;
+
+  return selectedProject;
 };

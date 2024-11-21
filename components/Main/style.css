@@ -8,6 +8,75 @@
   overflow-x: auto;
   padding-bottom: 50px;
 }
+.main .project-name-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-right: 15px;
+}
+.three-dots-icon {
+  position: relative;
+  cursor: pointer;
+  margin: 0 0 3px 7px;
+}
+.menu-container {
+  position: relative;
+  cursor: pointer;
+}
+.actions-container {
+  position: absolute;
+  width: 102px;
+  height: 80px;
+  left: 16px;
+  top: 27px;
+  border-radius: 5px;
+  display: none;
+  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.14));
+  background: #ffffff;
+}
+.show {
+  display: inline;
+}
+.hide {
+  display: none;
+}
+.actions-container .edit {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.actions-container .edit p {
+  position: relative;
+  top: 12px;
+  left: -26px;
+}
+
+.actions-container .delete {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+/* Shared styles for action items */
+.action-item {
+  position: relative;
+  height: 40px;
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+  color: #6f6f6f;
+  cursor: pointer;
+}
+.actions-container .delete p {
+  position: relative;
+  top: 13px;
+  left: -16px;
+}
+/* Hover effect */
+.actions-container .edit:hover,
+.actions-container .delete:hover {
+  background-color: rgba(0, 0, 0, 0.153);
+}
+
 .main .project-header {
   display: flex;
   flex-direction: row;
@@ -50,7 +119,43 @@
     padding: 25px 25px 5px;
   }
 }
+.green-true-icon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+.red-delete-icon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+.edit-project-name-input {
+  position: relative;
+  right: 11px;
+  top: -0.5px;
+  border-color: rgba(112, 112, 112, 0.2);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  padding-left: 10px;
+  background: #ffffff;
+  min-width: 200px;
+  max-width: 500px;
+  height: 38px;
 
+  font-size: 1.4rem;
+  font-weight: 500;
+
+  word-wrap: break-word;
+}
+.error-message {
+  color: red;
+  font-size: 11px;
+  font-weight: 500;
+  position: absolute;
+  left: 305px;
+  top: 80px;
+}
 /* PopUps   */
 
 .pop-up-container {
@@ -93,8 +198,15 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 65%;
 }
-
+.new-project-form div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .add-new-project-pop-up .title {
   position: relative;
   width: 138px;
@@ -115,22 +227,19 @@
   padding-left: 7px;
 }
 
-.project-name-input:focus {
-  padding-left: 10px;
-}
-
 .project-name-input {
   border-color: rgba(112, 112, 112, 0.2);
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
-  padding-left: 10px;
-
   background: #ffffff;
-  width: 355px;
+  margin-bottom: 25px;
   height: 38px;
+  padding-left: 10px;
 }
-
+/* .project-name-input::placeholder {
+  padding-left: 10px;
+} */
 .label-for-select-board-input {
   padding: 18px 0 12px 0;
   font-size: 12px;
@@ -142,17 +251,15 @@
 .select-board-input {
   width: 368px;
   height: 38px;
-
   border-color: rgba(112, 112, 112, 0.2);
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
-
   background: #ffffff;
 }
 
 .save-button {
-  width: 241px;
+  width: 60%;
   height: 40px;
   font-size: 15px;
   font-weight: 500;
@@ -162,20 +269,19 @@
   border: 0px;
   cursor: pointer;
 
-  margin: 70px 0 0 65.5px;
+  margin: 50px;
 }
 .custom-select .select-button {
-  width: 368px;
-  height: 38px;
   font-size: 12px;
   background-color: #fff;
-  padding: 0.675em 1em;
+  padding: 1.084em 1em;
   border: 1px solid rgba(112, 112, 112, 0.2);
   border-radius: 5px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .custom-select .selected-value {
@@ -219,8 +325,7 @@
 
 .custom-select {
   position: relative;
-  width: 300px;
-  max-width: 100%;
+
   font-size: 1.15rem;
   color: #000;
 }
@@ -240,7 +345,8 @@
 .select-dropdown {
   position: absolute;
   list-style: none;
-  width: 367px;
+  width: calc(100% - 2px);
+  margin-top: 40px;
   background-color: #fff;
   border: 1px solid rgba(112, 112, 112, 0.2);
   border-top: 0px;

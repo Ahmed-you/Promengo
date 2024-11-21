@@ -22,6 +22,7 @@ import {
 } from "./services/project.js";
 
 import { addBoardInLocalStorage } from "./services/board.js";
+import { displayCurrentProjectName } from "./components/Main/index.js";
 // addBoardInLocalStorage("my board", 81221);
 let projectData = [
   {
@@ -66,7 +67,7 @@ let projectData = [
 
 // addProjectInLocalStorage("pro1");
 // addProjectInLocalStorage("pro2");
-// addProjectInLocalStorage("pro3");  console.log(proName.innerHTML);
+// addProjectInLocalStorage("pro3");  console.log(projectNameElement.innerHTML);
 // addProjectInLocalStorage("pro4");
 
 // this function gives us the standard screen width size
@@ -97,3 +98,12 @@ window.addEventListener("storage", () => {
 window.onstorage = () => {
   console.log("hello");
 };
+
+// window.onload = () => {
+//   // const curantId = getLocalStorage("currentProjectIdFromSidebar")
+//   displayCurrentProjectName();
+//   // renderCurrentProject();
+//   // render the sidebar
+//   // render the heder
+//   // render the main section
+// };
