@@ -7,12 +7,15 @@
   flex-direction: row;
   overflow-x: auto;
   padding-bottom: 50px;
+  scroll-behavior: smooth;
 }
 .main .project-name-container {
+  position: relative;
   align-items: center;
   display: flex;
   flex-direction: row;
   margin-right: 15px;
+  max-width: 60%;
 }
 .three-dots-icon {
   position: relative;
@@ -24,7 +27,9 @@
   cursor: pointer;
 }
 .actions-container {
+  user-select: none;
   position: absolute;
+  z-index: 1;
   width: 102px;
   height: 80px;
   left: 16px;
@@ -38,7 +43,7 @@
   display: inline;
 }
 .hide {
-  display: none;
+  display: none !important;
 }
 .actions-container .edit {
   border-top-right-radius: 5px;
@@ -93,6 +98,10 @@
 @media screen and (max-width: 768px) {
   .right-container {
     width: calc(100% - 0px);
+    background-color: ora;
+  }
+  .error-message {
+    position: absolute;
   }
 }
 
@@ -120,41 +129,45 @@
   }
 }
 .green-true-icon {
+  z-index: 9;
+  margin-left: -57px;
   height: 20px;
-  width: 20px;
+  min-width: 20px;
   cursor: pointer;
 }
 .red-delete-icon {
+  z-index: 9;
+margin-left: 2px;
   height: 20px;
-  width: 20px;
+  min-width: 20px;
   cursor: pointer;
 }
 .edit-project-name-input {
   position: relative;
   right: 11px;
-  top: -0.5px;
+
   border-color: rgba(112, 112, 112, 0.2);
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
   padding-left: 10px;
   background: #ffffff;
-  min-width: 200px;
-  max-width: 500px;
+  min-width: 60px;
+  max-width: 80%;
   height: 38px;
-
+  padding-right: 48px;
   font-size: 1.4rem;
   font-weight: 500;
-
   word-wrap: break-word;
 }
+
 .error-message {
   color: red;
   font-size: 11px;
   font-weight: 500;
   position: absolute;
-  left: 305px;
-  top: 80px;
+  z-index: 1;
+  left: 5px;
 }
 /* PopUps   */
 

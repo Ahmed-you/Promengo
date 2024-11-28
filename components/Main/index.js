@@ -9,31 +9,44 @@ import {
 } from "../../services/project.js";
 import { previewProjectsNameOnTheSidebar } from "../Sidebar/index.js";
 import { renderCurrentProject } from "../Sidebar/index.js";
-import { isValidString } from "../../helpers/utils.js";
-
-let projectNameElement = getElement(".project-name");
+import { isValidString, addError, removeError } from "../../helpers/utils.js";
+import { previewBoardsOnTheMainPage } from "../BoardsContainer/index.js";
+const projectNameElement = getElement(".project-name");
 const threeDotsIcon = getElement(".three-dots-icon");
 const redDeleteIcon = getElement(".red-delete-icon");
 const greenTrueIcon = getElement(".green-true-icon");
+const newProjectBtn = getElement(".new-project");
+const NewUserGuidStep1 = getElement(".new-user-guid-step1");
 let selectedProject;
+let validProjectName;
+
+// this function resposapilty is for displaying the project name on the main page
 export const displayCurrentProjectName = () => {
+  const isNewUser =
+    getLocalStorage("isNewUser") != null ? getLocalStorage("isNewUser") : true;
+
   const projectId = getLocalStorage("currentProjectIdFromSidebar");
   const selectedProject = getProjectById(projectId);
-
   if (!selectedProject) {
     projectNameElement.textContent = "NoProjectsYet";
     threeDotsIcon.classList.add("hide");
+    if (isNewUser) {
+      newProjectBtn.style.zIndex = 10;
+      NewUserGuidStep1.classList.remove("hide");
+    }
   } else {
     projectNameElement.textContent = selectedProject.projectName;
     threeDotsIcon.classList.remove("hide");
+    NewUserGuidStep1.classList.add("hide");
+    newProjectBtn.style.zIndex = 0;
   }
 };
+
+//this function responsible for deletion
 const actionMenuContainer = getElement(".actions-container");
 export const deleteProjectUiAction = (deletedId) => {
   let projects = getLocalStorage("projects");
-  let currentIndex = projects.findIndex(
-    (item) => item.ProjectId === deletedId
-  );
+  let currentIndex = projects.findIndex((item) => item.ProjectId === deletedId);
 
   if (currentIndex == 0 && projects.length > 1) {
   } else {
@@ -46,7 +59,7 @@ export const deleteProjectUiAction = (deletedId) => {
     currentIndex < 0 ? null : projects[currentIndex]?.ProjectId;
   renderCurrentProject(newProjectId);
   previewProjectsNameOnTheSidebar();
-
+  previewBoardsOnTheMainPage();
   const liElement = document.getElementById(newProjectId);
 
   if (liElement) {
@@ -57,7 +70,6 @@ export const deleteProjectUiAction = (deletedId) => {
 let actionForm = document.forms["actionForm"]["edit-project-name-input"];
 
 const editProjectUiAction = () => {
-  //copied code
   let EditProjectNameInput = actionForm;
   selectedProject = getProjectById(
     getLocalStorage("currentProjectIdFromSidebar")
@@ -66,45 +78,72 @@ const editProjectUiAction = () => {
   isValidString();
 
   const errorMsg = document.createElement("div");
-  errorMsg.className = "error-message";
-
-  function addError(inputElement, message) {
-    errorMsg.textContent = message;
-    inputElement.style.border = "1px solid red";
-    inputElement.before(errorMsg);
-  }
-
-  function removeError(inputElement) {
-    inputElement.style.border = "";
-    errorMsg.remove();
-  }
+  errorMsg.classList.add("error-message");
+  errorMsg.style.bottom = "47px";
+  errorMsg.style.left = "-11px";
 
   EditProjectNameInput.onblur = function () {
+    validProjectName = false;
+
     if (!isValidString(EditProjectNameInput.value)) {
       addError(
         EditProjectNameInput,
+        errorMsg,
         "*Please Enter a Valid Name Only 'a-z A-Z 0-9'"
       );
     } else if (EditProjectNameInput.value === "") {
-      addError(EditProjectNameInput, "*Project Name Cannot Be Empty");
+      addError(EditProjectNameInput, errorMsg, "*Project Name Cannot Be Empty");
+      console.log(EditProjectNameInput.value.length);
+    } else if (EditProjectNameInput.value.length > 80) {
+      addError(
+        EditProjectNameInput,
+        errorMsg,
+        "*Board Name Must Be less than '80' characters"
+      );
     }
+    validProjectName = true;
   };
 
   EditProjectNameInput.onfocus = function () {
     removeError(EditProjectNameInput);
   };
-  //end of copied code
+
+  EditProjectNameInput.onsubmit = () => {
+    if (validProjectName) {
+    }
+  };
 
   projectNameElement.replaceWith(EditProjectNameInput);
   setTimeout(() => {
     EditProjectNameInput.focus();
-  }, 0);
+  }, 200);
   threeDotsIcon.classList.add("hide");
   greenTrueIcon.classList.remove("hide");
   redDeleteIcon.classList.remove("hide");
 
-  greenTrueIcon.addEventListener("pointerdown", () => {
-    if (!isValidString(EditProjectNameInput.value)) return;
+  greenTrueIcon.addEventListener("pointerdown", handleTrueIconClick);
+
+  function handleTrueIconClick(e) {
+    if (!isValidString(EditProjectNameInput.value)) {
+      addError(
+        EditProjectNameInput,
+        errorMsg,
+        "*Please Enter a Valid Name Only 'a-z A-Z 0-9'"
+      );
+      return;
+    } else if (EditProjectNameInput.value === "") {
+      addError(EditProjectNameInput, errorMsg, "*Project Name Cannot Be Empty");
+      console.log(EditProjectNameInput.value.length);
+      return;
+    } else if (EditProjectNameInput.value.length > 80) {
+      addError(
+        EditProjectNameInput,
+        errorMsg,
+        "*Board Name Must Be less than '80' characters"
+      );
+      return;
+    }
+
     let currentProjectId = getLocalStorage("currentProjectIdFromSidebar");
 
     updateProjects(currentProjectId, EditProjectNameInput.value);
@@ -118,13 +157,27 @@ const editProjectUiAction = () => {
     liElement.classList.add("selected-project");
 
     EditProjectNameInput.replaceWith(projectNameElement);
-  });
-  redDeleteIcon.addEventListener("pointerdown", () => {
+    removeError(EditProjectNameInput, errorMsg);
+  }
+
+  document.addEventListener("pointerdown", CancelEditClick);
+  const cancelEditActions = () => {
     threeDotsIcon.classList.remove("hide");
     redDeleteIcon.classList.add("hide");
     greenTrueIcon.classList.add("hide");
     EditProjectNameInput.replaceWith(projectNameElement);
-  });
+    removeError(EditProjectNameInput, errorMsg);
+  };
+  function CancelEditClick(e) {
+    const { target } = e;
+    if (target.closest(".red-delete-icon")) {
+      cancelEditActions();
+    } else if (target.closest(".projects-list li")) {
+      cancelEditActions();
+    } else if (target.closest(".new-project")) {
+      cancelEditActions();
+    }
+  }
 };
 document.addEventListener("pointerdown", handleClick);
 
@@ -141,7 +194,7 @@ function handleClick(e) {
   } else if (target.className != "three-dots-icon") {
     actionMenuContainer.classList.remove("show");
   }
-  if (e.target.closest(".edit")) {
+  if (target.closest(".edit")) {
     editProjectUiAction();
   }
 }

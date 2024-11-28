@@ -1,0 +1,21 @@
+
+ <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 200 200" style="background-color: transparent;">
+  <!-- Gradient Background for the Board -->
+  <defs>
+    <linearGradient id="boardGradient" x1="0" y1="0" x2="1" y2="1">
+    
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Board with Gradient -->
+  <rect x="20" y="20" width="160" height="150" rx="15" fill="url(#boardGradient)" stroke="#ffffff" stroke-width="8" />
+
+  <!-- Title as Rounded Line -->
+  <rect x="40" y="44" width="60" height="10" rx="8" fill="#ffffff" />
+  <rect x="150" y="44" width="10" height="10" rx="8" fill="#ffffff" />
+  <rect x="140" y="44" width="10" height="10" rx="8" fill="#ffffff" />
+  <rect x="130" y="44" width="10" height="10" rx="8" fill="#ffffff" />
+
+  <!-- Single Enlarged Inner Box -->
+  <rect x="37.5" y="85" width="125" height="70" rx="10" fill="#ffffff" stroke="#" stroke-width="4" />
+</svg> 

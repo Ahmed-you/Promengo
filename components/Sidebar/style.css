@@ -76,6 +76,7 @@
   display: flex;
   justify-content: space-between;
   padding-right: 51px;
+  user-select: none;
 }
 
 .projects-list {
@@ -85,8 +86,8 @@
 }
 
 .sidebar .logo {
-  width: 48.75px;
-  height: 41.78px;
+  /* width: 48.75px;
+  height: 41.78px; */
   padding-bottom: 18px;
 }
 
@@ -112,5 +113,11 @@
   .sidebar {
     display: none;
     display: block !important;
+  }
+}
+
+@media screen and (height < 410px) {
+  .sidebar {
+    height: fit-content;
   }
 }

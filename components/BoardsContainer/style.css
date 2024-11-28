@@ -22,6 +22,7 @@
   font-weight: 500;
   overflow-wrap: anywhere;
 }
+
 @media screen and (max-width: 768px) {
   .add-new-board {
     display: flex;
@@ -40,16 +41,31 @@
 
 @media screen and (max-width: 576px) {
   .add-new-board {
-    width: 140px;
+    width: 80px;
     height: 35px;
-    font-size: 0.83em;
-    font-weight: 500;
+    font-size: 0px;
+    padding: 20px;
+    background-image: url(/imgs/newBoard.svg);
+    background-repeat: no-repeat;
+    background-position: 40px;
+    background-size: 36px;
+    margin-right: -10px;
   }
   .add-new-board img {
-    height: 13px;
+    height: 16px;
+    margin-left: -21px;
   }
   .project-name {
     font-size: 1rem;
     font-weight: 500;
+  }
+  .edit-project-name-input {
+    font-size: 1rem;
+    position: relative;
+    height: 30px;
+  }
+  .error-message {
+   top:-16px;
+   font-size: 10px;
   }
 }
