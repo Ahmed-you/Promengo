@@ -86,16 +86,16 @@ const HandilingAddNewProjectPopUp = () => {
   let displayCheckedBoards = [];
   popUpContainer.addEventListener("click", (e) => {
     //here we get the checkBoxes
-    if (e.target.closest("li")) {
-      let li = e.target.closest("li");
-      let checkBox = li.firstElementChild;
+
+    if (e.target.className == "check-box") {
+      let checkBox = e.target;
       //here we make the check boxes functioning and we push them into an array
       if (checkBox.hasAttribute("checked")) {
         let indeXOfBoard = displayCheckedBoards.findIndex(
           (boardID) => boardID == defaultBoards[checkBox.id]
         );
         displayCheckedBoards.splice(indeXOfBoard, 1);
-
+        checkedBoards = checkedBoards.filter((id) => id !== checkBox.id);
         checkBox.removeAttribute("checked");
       } else {
         checkBox.setAttribute("checked", "");
@@ -189,6 +189,7 @@ const HandilingAddNewProjectPopUp = () => {
     checkedBoards.forEach((boardID) => {
       let checkBox = document.getElementById(boardID);
       checkBox.removeAttribute("checked");
+      checkBox.parentElement.innerHTML = checkBox.parentElement.innerHTML + "";
     });
     projectsList.style.display = "";
     arrow.className = "arrow-up";

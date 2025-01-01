@@ -111,34 +111,36 @@
                       id="select-dropdown"
                     >
                       <li role="option">
-                        <input
-                          type="checkbox"
-                          name=""
-                          class="check-box"
-                          id="To-Do"
-                        />
-                        <label>To Do</label>
+                        <label>
+                          <input
+                            type="checkbox"
+                            name=""
+                            class="check-box"
+                            id="To-Do"
+                          />To Do</label
+                        >
                       </li>
                       <li role="option">
-                        <input
-                          class="check-box"
-                          type="checkbox"
-                          name=""
-                          id="in-Progress"
-                        />
-
-                        <label>In Progress</label>
+                        <label for="in-Progress">
+                          <input
+                            class="check-box"
+                            type="checkbox"
+                            name=""
+                            id="in-Progress"
+                          />
+                          In Progress</label
+                        >
                       </li>
                       <li role="option">
-                        <input
-                          class="check-box"
-                          type="checkbox"
-                          name=""
-                          class="check-box"
-                          id="done"
-                        />
-
-                        <label>Done</label>
+                        <label for="done"
+                          ><input
+                            class="check-box"
+                            type="checkbox"
+                            name=""
+                            class="check-box"
+                            id="done"
+                          />Done</label
+                        >
                       </li>
                     </ul>
                   </div>
@@ -242,6 +244,84 @@
           <div class="main-bottom">
             <div class="boards-container"></div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PreviewTaskModule -->
+    <div class="task-preview-background-click-cover hide">
+      <div class="task-preview-modeul-container">
+        <div class="task-preview-title">View Task</div>
+
+        <div class="task-preview-data-container">
+          <div class="task-preview-name-container">
+            <div class="task-preview-name-title">Task Name</div>
+            <div class="task-preview-name">My Task Name Here</div>
+          </div>
+
+          <div class="task-preview-date-container">
+            <div class="task-preview-creation-date-title">Date and time</div>
+            <div class="task-preview-creation-date">
+              DD Month YYYY , TT:TT AM/PM
+            </div>
+          </div>
+
+          <div class="task-preview-description-container">
+            <div class="task-preview-description-title">Task Description</div>
+            <div class="task-preview-description">My Task Here My Task D</div>
+          </div>
+        </div>
+        <div class="task-preview-close-button">
+          <button>close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EditTaskModule -->
+    <div class="task-edit-background-click-cover hide">
+      <div class="task-edit-model">
+        <div class="task-edit-model-container">
+          <div class="task-edit-title">Edit Task</div>
+
+          <form class="task-edit-data-container" action="">
+            <div class="task-edit-name-container">
+              <label class="task-edit-name-title" for="">Edit Task Name</label>
+              <input
+                type="text"
+                name="taskName"
+                id="edit-task-name-input"
+                placeholder=""
+              />
+            </div>
+            <div class="task-edit-description-container">
+              <label class="task-edit-description-title" for=""
+                >Edit Task Description</label
+              >
+              <textarea
+                name="taskDescription"
+                id="edit-task-description-textarea"
+              >
+              </textarea>
+            </div>
+
+            <div class="task-edit-buttons-container">
+              <input
+                class="save-edit-task-button"
+                type="submit"
+                value="Save"
+                name="save"
+                id="save-edit-task-button"
+              />
+
+              <input
+                class="cancel-edit-task-button"
+                type="submit"
+                value="Cancel"
+                name="cancel"
+                id="cancel-edit-task-button"
+              />
+            </div>
+          </form>
         </div>
       </div>
     </div>

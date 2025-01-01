@@ -120,12 +120,17 @@
     padding-bottom: 20px;
   }
 
-  .main .project-header {
-    padding-bottom: 20px;
-  }
-
   .main {
-    padding: 25px 25px 5px;
+    padding: 10px 15px 5px;
+  }
+}
+
+@media screen and (max-height: 480px) {
+  .main .project-header {
+    padding-bottom: 12px;
+  }
+  .project-name {
+    font-size: 1.16rem !important;
   }
 }
 .green-true-icon {
@@ -137,7 +142,7 @@
 }
 .red-delete-icon {
   z-index: 9;
-margin-left: 2px;
+  margin-left: 2px;
   height: 20px;
   min-width: 20px;
   cursor: pointer;
@@ -172,7 +177,6 @@ margin-left: 2px;
 /* PopUps   */
 
 .pop-up-container {
-  /* visibility: hidden; */
   inset: 0;
   display: none;
   position: fixed;
@@ -250,9 +254,7 @@ margin-left: 2px;
   height: 38px;
   padding-left: 10px;
 }
-/* .project-name-input::placeholder {
-  padding-left: 10px;
-} */
+
 .label-for-select-board-input {
   padding: 18px 0 12px 0;
   font-size: 12px;
@@ -312,7 +314,6 @@ margin-left: 2px;
   position: relative;
   cursor: pointer;
   display: flex;
-  gap: 1rem;
   align-items: center;
 }
 
@@ -372,13 +373,12 @@ margin-left: 2px;
   visibility: hidden;
 }
 .check-box {
-  margin-left: 10px;
+  margin: 7px;
 }
 .select-dropdown li {
   position: relative;
   cursor: pointer;
   display: flex;
-  gap: 1rem;
   align-items: center;
 }
 

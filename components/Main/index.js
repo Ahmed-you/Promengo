@@ -28,7 +28,7 @@ export const displayCurrentProjectName = () => {
   const projectId = getLocalStorage("currentProjectIdFromSidebar");
   const selectedProject = getProjectById(projectId);
   if (!selectedProject) {
-    projectNameElement.textContent = "NoProjectsYet";
+    projectNameElement.textContent = "There Is No Project ";
     threeDotsIcon.classList.add("hide");
     if (isNewUser) {
       newProjectBtn.style.zIndex = 10;
@@ -98,7 +98,7 @@ const editProjectUiAction = () => {
       addError(
         EditProjectNameInput,
         errorMsg,
-        "*Board Name Must Be less than '80' characters"
+        "*htmlBoardTemplate Name Must Be less than '80' characters"
       );
     }
     validProjectName = true;
@@ -184,7 +184,7 @@ document.addEventListener("pointerdown", handleClick);
 function handleClick(e) {
   const { target } = e;
 
-  if (target.closest(".delete")) {
+  if (target.closest(".three-dots-icon .delete")) {
     let currentId = getLocalStorage("currentProjectIdFromSidebar");
 
     deleteProjectUiAction(currentId);
@@ -194,7 +194,7 @@ function handleClick(e) {
   } else if (target.className != "three-dots-icon") {
     actionMenuContainer.classList.remove("show");
   }
-  if (target.closest(".edit")) {
+  if (target.closest(".three-dots-icon .edit")) {
     editProjectUiAction();
   }
 }
