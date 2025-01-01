@@ -28,7 +28,7 @@ export const addBoardInLocalStorage = (boardName, projectId) => {
   return newBoard;
 };
 
-const IdesValidationChecker = (ProjectId, boardId) => {
+export const IdesValidationChecker = (ProjectId, boardId, taskId) => {
   if (!ProjectId) {
     throw new Error("'ProjectId' is required.");
   } else if (typeof ProjectId !== "string") {
@@ -37,11 +37,14 @@ const IdesValidationChecker = (ProjectId, boardId) => {
     throw new Error("'BoardId' is required.");
   } else if (typeof boardId !== "string") {
     throw new Error("'BoardId' must be a string.");
+  } else if (!taskId) {
+    throw new Error("'taskId' is required.");
+  } else if (typeof taskId !== "string") {
+    throw new Error("'taskId' must be a string.");
   }
 };
-
 export const deleteBoard = (ProjectId, boardId) => {
-  IdesValidationChecker(ProjectId, boardId);
+  IdesValidationChecker(ProjectId, boardId, "0");
 
   const projects = getLocalStorage("projects");
   const project = projects.find((item) => item.ProjectId == ProjectId);
@@ -61,8 +64,7 @@ export const deleteBoard = (ProjectId, boardId) => {
 };
 
 export const editBoard = (editedBoardName, ProjectId, boardId) => {
-  // if (!editStatus) return;
-  IdesValidationChecker(ProjectId, boardId);
+  IdesValidationChecker(ProjectId, boardId, "0");
 
   const projects = getLocalStorage("projects");
   const project = projects.find((item) => item.ProjectId == ProjectId);
@@ -77,7 +79,7 @@ export const editBoard = (editedBoardName, ProjectId, boardId) => {
 };
 
 export const getBoardByID = (ProjectId, boardId) => {
-  IdesValidationChecker(ProjectId, boardId);
+  IdesValidationChecker(ProjectId, boardId, "0");
 
   const projects = getLocalStorage("projects");
   const project = projects.find((item) => item.ProjectId == ProjectId);

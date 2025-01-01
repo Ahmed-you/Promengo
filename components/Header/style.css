@@ -103,3 +103,9 @@
     right: 30px;
   }
 }
+
+@media screen and (max-height: 480px) {
+  .header {
+    min-height: 48px !important;
+  }
+}

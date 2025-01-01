@@ -1,8 +1,10 @@
+import { addFirstTaskButton } from "./tasksTemplate.js";
+
 export const boardAction = `      
 <div  class="board-action">
   <div class="board-name"><p>{{boardName}}</p></div>
   <div class="actions">
-    <svg class ="Icon_material-add"
+    <svg class ="Icon_material-add hide"
       xmlns="http://www.w3.org/2000/svg"
       width="16"
       height="16"
@@ -82,7 +84,8 @@ export const boardAction = `
     </svg>
   </div>
 </div>`;
-export const boardEdit = ` 
+
+export const boardEdit = `
 <form action="" class="board-form-container">
   <input
     type="text"
@@ -141,12 +144,13 @@ export const boardEdit = `
     </svg>
   </button>
 </form>`;
-
 export const board = ` 
   <div class='board-header__container'>
-  {{htmlTemplate}}
+  {{htmlBoardTemplate}}
   </div>
   <div class="tasks-container">
-  <div class="task"></div>
+    ${addFirstTaskButton}
+  </div>
   </div>
 `;
+

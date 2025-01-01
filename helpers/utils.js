@@ -31,3 +31,30 @@ export function removeError(inputElement, errorMsg) {
     errorMsg.remove();
   }
 }
+
+export const taskDescriptionShorteningTool = (taskDescription) => {
+  if (taskDescription?.length > 55) {
+    let shortenedTaskDescription =
+      taskDescription.slice(0, 55) +
+      '<span class = "show-more"> show more...</span>';
+    return shortenedTaskDescription;
+  } else if (!taskDescription) {
+    return `<div
+  style="
+    display: flex;
+    margin-top: 17px;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 42px;
+  "
+>
+  There is No Description
+</div>
+
+`;
+  } else {
+    return taskDescription;
+  }
+};

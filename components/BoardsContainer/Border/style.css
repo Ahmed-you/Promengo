@@ -6,7 +6,6 @@
   flex-direction: column;
   width: 275px;
   max-height: calc(100vh - 345px);
-  min-height: 200px;
   height: fit-content;
   background-color: #ffffff;
   border-radius: 10px;
@@ -28,14 +27,6 @@
   animation: toVoid 0.45s forwards;
 }
 
-/* @keyframes toVoid {
-  from {
-    display: block;
-  }
-  to {
-    display: none;
-  }
-} */
 @keyframes toVoid {
   from {
     width: 275px;
@@ -61,7 +52,7 @@
   }
 }
 .board .board-action {
-  min-height: 20px;
+  min-height: 32px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -75,18 +66,36 @@
   width: 70%;
 }
 .board .actions svg {
-  width: 16px;
+  width: 20px;
   cursor: pointer;
 }
 
 .board .actions {
   user-select: none;
 }
+.board:has(.default) {
+  min-height: 318px;
+}
+.default {
+  inset: 0 15px 0 15px;
+  position: absolute;
+  z-index: 1;
+  width: calc(100% - 30px);
+  display: flex;
+  justify-content: center;
+  margin-top: 68px;
+}
+.board .tasks-container:has(.default) {
+  justify-content: center;
+  min-height: 225px;
+}
 
 .board .tasks-container {
   overflow-y: auto;
   scroll-margin-left: 100px;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 0 5px;
   padding: 5px 15px 20px;
 }
@@ -111,7 +120,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-bottom: 9.4px;
+  padding-bottom: 23.4px;
 }
 
 .new-board-action-buttons-style {
@@ -148,5 +157,14 @@
 @media screen and (max-height: 651px) {
   .board {
     max-height: calc(100vh - 230px);
+  }
+  
+  .board .actions svg {
+    height: 20px;
+  }
+}
+@media screen and (max-width: 651px) {
+  .board .actions svg {
+    height: 20px;
   }
 }

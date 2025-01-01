@@ -44,7 +44,6 @@ document.addEventListener("click", (e) => {
   // handling deleting board button click
   if (target.closest(".Icon_material-delete")) {
     selectedBoard.classList.add("smoothToVoid");
-
     deleteBoard(selectedProject, selectedBoard.id);
     setTimeout(() => {
       selectedBoard.remove();
@@ -107,11 +106,11 @@ document.addEventListener("submit", (e) => {
             " *Please Enter a Valid Name Only 'a-z A-Z 0-9'"
           );
           return;
-        } else if (vars.boardName.length > 80) {
+        } else if (vars.boardName.length > 25) {
           addError(
             NewBoardFormInput,
             errorMsg,
-            "*Board Name Must Be less than '80' characters"
+            "*Board Name Must Be less than 25' characters"
           );
           return;
         } else if (!vars.boardName) {
@@ -161,19 +160,30 @@ document.addEventListener("submit", (e) => {
         boardHeaderContainer.innerHTML = createTemplate(boardAction, {
           boardName: NewBoardNameValue,
         });
+
+        if (selectedBoard.querySelectorAll(".task").length != 0) {
+          selectedBoard
+            .querySelector(".Icon_material-add")
+            .classList.remove("hide");
+        }
       }
     }
 
     //cancel editing
     if (submitButton.classList.contains("red-delete-button-icon")) {
+      const selectedBoard = e.target.closest(".board");
+
       const boardHeaderContainer = e.target.closest(".board-header__container");
       boardHeaderContainer.innerHTML = createTemplate(boardAction, {
         boardName: OldBoardName,
       });
       removeError(NewBoardFormInput, errorMsg);
       newBoardLock = false;
+      if (selectedBoard.querySelectorAll(".task").length != 0) {
+        selectedBoard
+          .querySelector(".Icon_material-add")
+          .classList.remove("hide");
+      }
     }
   }
 });
-
-console.log("hi");

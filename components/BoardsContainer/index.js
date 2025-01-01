@@ -3,6 +3,7 @@ import { getProjectById } from "../../services/project.js";
 import "./Border/index.js";
 import { board, boardAction, boardEdit } from "./templates/boardsTemplate.js";
 import { createTemplate } from "../../helpers/utils.js";
+import { previewTasksOnEachBoard } from "./Border/Tasks/index.js";
 
 //variables & constants;
 export const bordersContainer = getElement(".boards-container");
@@ -16,11 +17,10 @@ export const createBoard = (vars, isNewBoard = false) => {
   if (isNewBoard) {
     newBoard.insertAdjacentHTML(
       "beforeend",
-      createTemplate(board, { htmlTemplate: boardEdit })
+      createTemplate(board, { htmlBoardTemplate: boardEdit })
     );
 
     newBoard.classList.add("newBoard");
-
     bordersContainer.append(newBoard);
     return newBoard;
   }
@@ -28,18 +28,18 @@ export const createBoard = (vars, isNewBoard = false) => {
   else {
     newBoard.insertAdjacentHTML(
       "beforeend",
-      createTemplate(board, { htmlTemplate: boardAction, ...vars })
+      createTemplate(board, { htmlBoardTemplate: boardAction, ...vars })
     );
 
     newBoard.id = vars.boardId;
 
     bordersContainer.append(newBoard);
+    return newBoard;
   }
 };
 
 //this function will get all boards in a selected project from local storage and preview them on the main page
 export const previewBoardsOnTheMainPage = () => {
-
   bordersContainer.innerHTML = "";
   const projectId = getLocalStorage("currentProjectIdFromSidebar");
   const selectedProject = getProjectById(projectId);
@@ -48,7 +48,7 @@ export const previewBoardsOnTheMainPage = () => {
   const addNewBoard = getElement(".add-new-board");
 
   if (!selectedProject) {
-    projectNameElement.textContent = "NoProjectsYet";
+    projectNameElement.textContent = "There Is No Projects ";
     threeDotsIcon.classList.add("hide");
     addNewBoard.classList.add("hide");
   } else {
@@ -59,7 +59,10 @@ export const previewBoardsOnTheMainPage = () => {
     const boards = selectedProject.boards;
 
     boards.forEach((board) => {
-      createBoard(board);
+      const boardElement = createBoard(board);
+      board.tasks.forEach((task) => {
+        previewTasksOnEachBoard(task, boardElement);
+      });
     });
   }
 };
