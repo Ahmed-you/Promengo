@@ -2,8 +2,8 @@ import {
   getLocalStorage,
   setLocalStorage,
 } from "../../helpers/localStorage.js";
-import { addProjectInLocalStorage } from "../../services/project.js";
-import { getProjectById } from "../../services/project.js";
+
+import { previewBoardsOnTheMainPage } from "../BoardsContainer/index.js";
 import { displayCurrentProjectName } from "../Main/index.js";
 
 const setupNavigationMenuBehaver = () => {
@@ -69,6 +69,7 @@ export const previewProjectsNameOnTheSidebar = () => {
     e.target.classList = "selected-project";
 
     renderCurrentProject(e.target.id);
+    previewBoardsOnTheMainPage();
   });
 };
 

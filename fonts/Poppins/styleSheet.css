@@ -93,3 +93,9 @@
   font-weight: 100;
   font-style: italic;
 }
+
+@font-face {
+  font-family: "Haglos";
+  src: url("./Haglos.otf") format("opentype");
+  font-weight: 100;
+}

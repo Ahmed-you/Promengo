@@ -6,7 +6,8 @@ import {
 } from "../Sidebar/index.js";
 import { getLocalStorage } from "../../helpers/localStorage.js";
 import { setLocalStorage } from "../../helpers/localStorage.js";
-import { isValidString } from "../../helpers/utils.js";
+import { addError, isValidString, removeError } from "../../helpers/utils.js";
+import { previewBoardsOnTheMainPage } from "../BoardsContainer/index.js";
 // show/show side bar when screen width get to a cretin size
 const sidebarMenuBtnHandler = () => {
   const sidebar = getElement(".sidebar");
@@ -38,10 +39,15 @@ const HandilingAddNewProjectPopUp = () => {
   const selectedValue = getElement(".selected-value");
   const projectsList = getElement(".projects-list");
   const arrow = getElement("#projects-nav img");
+  const addNewProjectForm = document.forms.newProjectForm;
+  const projectNameInput = addNewProjectForm.elements.projectNameInput;
+  const NewUserGuidStep1 = getElement(".new-user-guid-step1");
 
   //this event is responsible for showing/hiding the pop up
   newProjectBtn.addEventListener("click", (e) => {
     popUpContainer.style.display = "flex";
+    projectNameInput.focus();
+    NewUserGuidStep1.classList.add("hide");
   });
 
   popUpContainer.addEventListener("click", (e) => {
@@ -103,68 +109,78 @@ const HandilingAddNewProjectPopUp = () => {
     }
   });
 
-  let addNewProjectForm = document.forms.newProjectForm;
-  let projectNameInput = addNewProjectForm.elements.projectNameInput;
-
   let boards = [];
-  isValidString();
   const errorMsg = document.createElement("div");
   errorMsg.classList.add("error-message");
 
   errorMsg.style.left = "44px";
-  errorMsg.style.top = "2px";
-  const lableForProjectNameInput = getElement(".lable-for-project-name-input");
   projectNameInput.onblur = function () {
-    errorMsg.textContent = "*Please Enter a Valid Name Only 'a-z A-Z 0-9'";
-
     if (!isValidString(projectNameInput.value)) {
-      projectNameInput.style.border = "1px red solid";
-      lableForProjectNameInput.after(errorMsg);
+      addError(
+        projectNameInput,
+        errorMsg,
+        "*Please Enter a Valid Name Only 'a-z A-Z 0-9'"
+      );
+    } else if (projectNameInput.value === "") {
+      addError(projectNameInput, errorMsg, "*Project Name Cannot Be Empty");
+    } else if (projectNameInput.value.length > 80) {
+      addError(
+        projectNameInput,
+        errorMsg,
+        "*Project Name Must Be less than '80' characters"
+      );
     }
   };
 
   projectNameInput.onfocus = function () {
     projectNameInput.style.border = "";
 
-    errorMsg.remove();
+    removeError(projectNameInput, errorMsg);
   };
   addNewProjectForm.addEventListener("submit", (e) => {
-    if (!projectNameInput.value) {
-      errorMsg.innerHTML = "*Please Enter a Project Name";
-      lableForProjectNameInput.after(errorMsg);
-
-      e.preventDefault();
-      return;
-    }
     if (!isValidString(projectNameInput.value)) {
-      let timerId = setInterval(() => {
-        errorMsg.style.fontWeight = "600";
-      }, 0);
+      addError(
+        projectNameInput,
+        errorMsg,
+        "*Please Enter a Valid Name Only 'a-z A-Z 0-9'"
+      );
+      e.preventDefault();
 
-      // after 5 seconds stop
-      setTimeout(() => {
-        clearInterval(timerId);
-        errorMsg.style.fontWeight = "400";
-      }, 1000);
+      return;
+    } else if (projectNameInput.value === "") {
+      addError(projectNameInput, errorMsg, "*Project Name Cannot Be Empty");
+      e.preventDefault();
 
+      return;
+    } else if (projectNameInput.value.length > 80) {
+      addError(
+        projectNameInput,
+        errorMsg,
+        "*Project Name Must Be less than '80' characters"
+      );
       e.preventDefault();
 
       return;
     }
-
     e.preventDefault();
 
     checkedBoards.forEach((boardId) => {
+      false;
       boards.push(defaultBoards[boardId]);
     });
 
     addProjectInLocalStorage(projectNameInput.value, boards);
+    setLocalStorage("isNewUser", false);
 
     const projects = getLocalStorage("projects") || [];
     let projectId = projects[projects.length - 1].ProjectId;
     previewProjectsNameOnTheSidebar();
     renderCurrentProject(projectId);
+    previewBoardsOnTheMainPage();
+    console.log(boards);
 
+    boards = [];
+    console.log(boards);
     let projectNameElement = document.getElementById(projectId);
     projectNameElement.classList = "selected-project";
 
@@ -177,6 +193,7 @@ const HandilingAddNewProjectPopUp = () => {
     projectsList.style.display = "";
     arrow.className = "arrow-up";
     displayCheckedBoards = [];
+    checkedBoards = [];
     localStorage.setItem("projectsDisplayStatsInTheSideBar", "");
     localStorage.setItem("sidebarArrowStats", "arrow-up");
 
